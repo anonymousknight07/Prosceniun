@@ -29,6 +29,7 @@ const Home: React.FC = () => {
     "French",
     "German",
     "Chinese",
+    "Hindi",
   ]);
   const [selectedLanguage, setSelectedLanguage] = useState<string>("Spanish");
 
