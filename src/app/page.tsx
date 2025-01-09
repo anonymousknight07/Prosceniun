@@ -20,6 +20,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import Toast from "@/components/Toast";
 import CharacterCount from "@/components/CharacterCount";
 import TranslationHistory from "@/components/TranslationHistory";
+import VoiceSelector from "@/components/VoiceSelector";
 
 interface Translation {
   id: string;
@@ -40,6 +41,7 @@ const Home: React.FC = () => {
   const [speaking, setSpeaking] = useState<boolean>(false);
   const [toastMessage, setToastMessage] = useState<string>("");
   const [showToast, setShowToast] = useState<boolean>(false);
+  const [selectedVoice, setSelectedVoice] = useState<SpeechSynthesisVoice | null>(null);
   const [languages] = useState<string[]>([
     "English",
     "Spanish",
@@ -149,17 +151,20 @@ const Home: React.FC = () => {
 
     const utterance = new SpeechSynthesisUtterance(text);
     
-    // Set the language based on the selected language
-    const langCode = {
-      English: 'en-US',
-      Spanish: 'es-ES',
-      French: 'fr-FR',
-      German: 'de-DE',
-      Chinese: 'zh-CN',
-      Hindi: 'hi-IN'
-    }[selectedLanguage] || 'en-US';
-    
-    utterance.lang = langCode;
+    if (selectedVoice) {
+      utterance.voice = selectedVoice;
+    } else {
+      const langCode = {
+        English: 'en-US',
+        Spanish: 'es-ES',
+        French: 'fr-FR',
+        German: 'de-DE',
+        Chinese: 'zh-CN',
+        Hindi: 'hi-IN'
+      }[selectedLanguage] || 'en-US';
+      
+      utterance.lang = langCode;
+    }
     
     utterance.onend = () => {
       setSpeaking(false);
@@ -236,11 +241,13 @@ const Home: React.FC = () => {
                           className={`cursor-pointer ${speaking ? 'text-orange-500' : ''}`}
                           onClick={() => handleAudioPlayback(sourceText)}
                         />
+                       
                         <FileUpload handleFileUpload={handleFileUpload} />
                         <LinkPaste handleLinkPaste={handleLinkPaste} />
                       </span>
                       <CharacterCount current={sourceText.length} max={2000} />
                     </div>
+                    
                   </div>
 
                   <div className={`relative z-10 flex flex-col space-y-3 p-3 border rounded-lg shadow-lg ${isDark ? 'bg-neutral-900 border-neutral-700' : 'bg-white border-neutral-200'}`}>
@@ -284,6 +291,11 @@ const Home: React.FC = () => {
                         />
                       </div>
                     </div>
+                    <VoiceSelector
+                          selectedVoice={selectedVoice}
+                          onVoiceChange={setSelectedVoice}
+                          language={selectedLanguage}
+                        />
                   </div>
                 </div>
 
