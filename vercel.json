@@ -6,9 +6,7 @@
         "use": "@vercel/next"
       }
     ],
-    "eslint": {
-      "ignoreDuringBuilds": true
-    },
+    
     "typescript": {
       "ignoreBuildErrors": true
     },
