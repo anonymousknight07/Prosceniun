@@ -1,0 +1,29 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/next"
+      }
+    ],
+    "eslint": {
+      "ignoreDuringBuilds": true
+    },
+    "typescript": {
+      "ignoreBuildErrors": true
+    },
+    "rewrites": [
+      {
+        "source": "/api/:path*",
+        "destination": "/api/:path*"
+      }
+    ],
+    "redirects": [
+      {
+        "source": "/old-route",
+        "destination": "/new-route",
+        "permanent": true
+      }
+    ]
+  }
+  
