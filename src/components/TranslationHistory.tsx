@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { IconTrash } from '@tabler/icons-react';
+import { IconTrash, IconThumbUp, IconThumbDown } from '@tabler/icons-react';
 
 interface Translation {
   id: string;
@@ -8,6 +8,8 @@ interface Translation {
   target: string;
   language: string;
   timestamp: Date;
+  likes: number;
+  dislikes: number;
 }
 
 interface TranslationHistoryProps {
@@ -32,6 +34,14 @@ const TranslationHistory: React.FC<TranslationHistoryProps> = ({ translations, o
             <div className="flex justify-between items-center mb-2">
               <span className="text-sm text-neutral-400">{translation.language}</span>
               <div className="flex items-center gap-2">
+                <span className="flex items-center gap-1">
+                  <IconThumbUp size={14} className="text-green-400" />
+                  <span className="text-xs text-neutral-400">{translation.likes}</span>
+                </span>
+                <span className="flex items-center gap-1">
+                  <IconThumbDown size={14} className="text-red-400" />
+                  <span className="text-xs text-neutral-400">{translation.dislikes}</span>
+                </span>
                 <span className="text-xs text-neutral-500">
                   {new Date(translation.timestamp).toLocaleString()}
                 </span>

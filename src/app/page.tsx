@@ -200,7 +200,7 @@ const Home: React.FC = () => {
       };
       setTranslations(prev => [newTranslation, ...prev].slice(0, 10));
     }
-  }, [targetText]);
+  }, [targetText, selectedLanguage, sourceText]);
 
   return (
     <div className={`w-full min-h-screen ${isDark ? 'dark bg-neutral-900' : 'bg-white'}`}>
