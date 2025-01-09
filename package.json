@@ -1,5 +1,5 @@
 {
-  "name": "Proscenium-V:1",
+  "name": "proscenium-v1",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -19,6 +19,7 @@
     "next": "14.2.4",
     "openai": "^4.52.3",
     "preline": "^2.3.0",
+    "prop-types": "^15.8.1",
     "react": "^18",
     "react-dom": "^18",
     "react-speech-recognition": "^3.10.0",
